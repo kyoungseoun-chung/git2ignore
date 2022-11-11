@@ -10,6 +10,9 @@ def test_template():
 
     template = Template("./tests/test_outputs/")
 
+    # Remove template in test_outputs directory
+    template.delete_gitignore()
+
     template_dir = Path("./git2ignore/templates/")
 
     # Check number of available templates in ./git2ignore/templates/
@@ -47,6 +50,3 @@ def test_template():
     # Test with comma separation
     with pytest.warns(UserWarning):
         template.add_arguments(".DS_Store, .vscode")
-
-    # Remove template in test_outputs directory
-    template.delete_gitignore()

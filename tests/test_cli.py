@@ -82,11 +82,3 @@ def test_cli():
         Path("./tests/test_outputs/.gitignore").read_text().splitlines()[-1]
         == "I-love-python"
     )
-
-    with mock.patch(
-        "argparse.ArgumentParser.parse_args",
-        return_value=GI_PARSE.parse_args(
-            ["-d", "-p", "./tests/test_outputs/"]
-        ),
-    ):
-        main()
