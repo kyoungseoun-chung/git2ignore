@@ -41,7 +41,7 @@ jobs:
         run: poetry install --no-interaction
 
       - name: Code Quality
-        run: poetry run black . --check
+        run: poetry run pre-commit run --all-files
 
       - name: Test with pytest
         env:
