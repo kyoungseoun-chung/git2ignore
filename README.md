@@ -3,6 +3,11 @@
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
+![CI status](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+<!-- Pytest Coverage Comment:Begin -->
+<!-- Pytest Coverage Comment:End -->
+
+
 Python interface to generate `.git-ignore` template.
 
 Inspired by [git-ignore](https://github.com/qqpann/Git-ignore), but updated for the latest python version, and the package is managed by `poetry`.

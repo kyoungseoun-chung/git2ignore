@@ -43,8 +43,6 @@ jobs:
       - name: Code Quality
         run: poetry run pre-commit run --all-files
 
-      - name: Test with pytest
-        env:
-          DJANGO_SETTINGS_MODULE: project.settings
-          SECRETS_FILE: .confidential/ci.json
-        run: poetry run pytest --cov . -n 2
+      - name: Test and build coverage file
+        run: |
+          poetry run pytest --cov=git2ignore tests/
