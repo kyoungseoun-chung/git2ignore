@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "git2ignore"
+version = "0.1.0"
+description = "python interface to generate .gitignore file."
+authors = ["Kyoungseoun Chung <kyoungseoun.chung@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.2.0"
+pytest-cov = "^4.0.0"
+pre-commit = "^2.20.0"
+black = "^22.10.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts = "-s -v"
+
+[tool.poetry.plugins."console_scripts"]
+git2ignore = "git2ignore.__main__:main"
