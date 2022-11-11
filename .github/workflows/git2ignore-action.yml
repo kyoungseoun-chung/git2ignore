@@ -11,8 +11,6 @@ jobs:
       PYTHON: "3.10"
 
     steps:
-      - uses: checkout@v2
-
       - uses: actions/setup-python@v2
         with:
           python-version: 3.10
@@ -46,18 +44,3 @@ jobs:
           DJANGO_SETTINGS_MODULE: project.settings
           SECRETS_FILE: .confidential/ci.json
         run: poetry run pytest --cov . -n 2
-
-  update:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Pull & update submodules recursively
-        run: |
-          git submodule update --init --recursive
-          git submodule update --recursive --remote
-
-      - name: Commit & push changes
-        run: |
-          git commit -am "action: :arrow_up: Update submodules"
-          git push
