@@ -12,7 +12,9 @@ def test_cli():
     # Delete
     with mock.patch(
         "argparse.ArgumentParser.parse_args",
-        return_value=GI_PARSE.parse_args(["-d"]),
+        return_value=GI_PARSE.parse_args(
+            ["-d", "-p", "./tests/test_outputs/"]
+        ),
     ):
         main()
 
@@ -50,11 +52,11 @@ def test_cli():
 
     assert (
         Path("./tests/test_outputs/.gitignore").read_text().splitlines()[-3]
-        == ".DS_Store"
+        == ".vscode"
     )
     assert (
         Path("./tests/test_outputs/.gitignore").read_text().splitlines()[-2]
-        == ".vscode"
+        == ".DS_Store"
     )
     assert (
         Path("./tests/test_outputs/.gitignore").read_text().splitlines()[-1]
@@ -82,3 +84,20 @@ def test_cli():
         Path("./tests/test_outputs/.gitignore").read_text().splitlines()[-1]
         == "I-love-python"
     )
+
+    with mock.patch(
+        "argparse.ArgumentParser.parse_args",
+        return_value=GI_PARSE.parse_args(
+            ["-d", "-p", "./tests/test_outputs/"]
+        ),
+    ):
+        main()
+
+    # Add fresh template
+    with mock.patch(
+        "argparse.ArgumentParser.parse_args",
+        return_value=GI_PARSE.parse_args(
+            ["-t", "python", "-p", "./tests/test_outputs/"]
+        ),
+    ):
+        main()
