@@ -66,7 +66,7 @@ class Template:
         if not self.gitignore.exists():
             warnings.warn(
                 UserWarning(
-                    f"git2ignore: .gitignore does not exist. {args} Will added to a blank .gitignore."
+                    f"git2ignore: .gitignore does not exist. {args} will be added to a blank .gitignore file."
                 )
             )
             self.gitignore.touch()
