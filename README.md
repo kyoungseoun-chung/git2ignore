@@ -3,10 +3,7 @@
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
-![CI status](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
-<!-- Pytest Coverage Comment:Begin -->
-<!-- Pytest Coverage Comment:End -->
-
+![CI status](https://github.com/kyoungseoun-chung/git2ignore/actions/workflows/git2ignore-action.yml/badge.svg)
 
 Python interface to generate `.git-ignore` template.
 
