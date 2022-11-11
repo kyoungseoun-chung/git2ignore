@@ -50,11 +50,11 @@ def test_cli():
 
     assert (
         Path("./tests/test_outputs/.gitignore").read_text().splitlines()[-3]
-        == ".vscode"
+        == ".DS_Store"
     )
     assert (
         Path("./tests/test_outputs/.gitignore").read_text().splitlines()[-2]
-        == ".DS_Store"
+        == ".vscode"
     )
     assert (
         Path("./tests/test_outputs/.gitignore").read_text().splitlines()[-1]
