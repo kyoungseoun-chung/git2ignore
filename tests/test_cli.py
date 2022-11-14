@@ -66,6 +66,21 @@ def test_cli():
     with mock.patch(
         "argparse.ArgumentParser.parse_args",
         return_value=GI_PARSE.parse_args(
+            ["-d", ".DS_Store", "-p", "./tests/test_outputs/"]
+        ),
+    ):
+
+        main()
+
+    pass
+    assert (
+        Path("./tests/test_outputs/.gitignore").read_text().splitlines()[-2]
+        == ".vscode"
+    )
+
+    with mock.patch(
+        "argparse.ArgumentParser.parse_args",
+        return_value=GI_PARSE.parse_args(
             ["-d", "-p", "./tests/test_outputs/"]
         ),
     ):

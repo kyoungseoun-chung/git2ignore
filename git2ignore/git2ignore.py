@@ -3,6 +3,7 @@ import re
 import warnings
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Optional
 
 
 TEMPLATE_DIR = Path(__file__).parents[0] / Path("templates")
@@ -73,11 +74,7 @@ class Template:
 
         ignore_text = self.gitignore.read_text()
 
-        # Sepration of arguments using comma is possible
-        args = args.replace(",", " ")
-
-        # Split args by whitespace/s
-        args_splitted = re.split(r"[\s,]+", args)
+        args_splitted = _split_args(args)
 
         for arg in args_splitted:
             if re.search(arg, ignore_text):
@@ -92,15 +89,43 @@ class Template:
                     f.write(f"\n{arg}")
         print("git2ignore: done!")
 
-    def delete_gitignore(self) -> None:
+    def delete_gitignore(self, args: Optional[str]) -> None:
         """Delete gitignore file created."""
 
         gitignore_path = Path(self.gitignore)
-        if gitignore_path.exists():
-            gitignore_path.unlink()
-        else:
-            warnings.warn(
-                UserWarning(
-                    "git2ignore: .gitignore does not exist! No action required."
+
+        if args is None:
+            if gitignore_path.exists():
+                gitignore_path.unlink()
+            else:
+                warnings.warn(
+                    UserWarning(
+                        "git2ignore: .gitignore does not exist! No action required."
+                    )
                 )
-            )
+        else:
+            ignore_text = self.gitignore.read_text()
+            args_splitted = _split_args(args)
+            for arg in args_splitted:
+                if not re.search(arg, ignore_text):
+                    warnings.warn(
+                        UserWarning(
+                            f"git2ignore: argument ({args}) is not found in .gitignore!"
+                        )
+                    )
+                else:
+                    # Replace to line break
+                    args_deleted = re.sub(arg, "\n", ignore_text)
+                    # If there is two line breaks, remove one
+                    args_cleaned = re.sub("\n\n\n", "\n", args_deleted)
+                    self.gitignore.write_text(args_cleaned)
+
+
+def _split_args(args: str) -> list[str]:
+    # Sepration of arguments using comma is possible
+    args = args.replace(",", " ")
+
+    # Split args by whitespace/s
+    args_splitted = re.split(r"[\s,]+", args)
+
+    return args_splitted

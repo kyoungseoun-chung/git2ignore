@@ -18,7 +18,12 @@ GI_PARSE.add_argument(
     action="store_true",
 )
 GI_PARSE.add_argument(
-    "-d", "--delete", help="Delete .gitignore file.", action="store_true"
+    "-d",
+    "--delete",
+    nargs="?",
+    const=True,
+    metavar="delete",
+    help="Delete .gitignore file or delete arguments in .gitignore file.",
 )
 GI_PARSE.add_argument(
     "-t", "--template", metavar="template", help="Add template to .gitignore."
@@ -55,20 +60,22 @@ def main() -> None:
     # Display list of available templates
     if argv.list:
         template.print_available()
-        printed = True
-    else:
-        printed = False
 
-    # Delete .gitignore
-    if argv.delete:
-        template.delete_gitignore()
+    # Delete .gitignore or delete arguments in .gitignore
+    # This is prior to all operation including copy template and add.
+    if argv.delete or isinstance(argv.delete, str):
+        template.delete_gitignore(argv.delete)
 
     # Add template if the argument is given
+    # Always check template before adding arguments.
     if argv.template is not None:
-        save_template = argv.template
-        template.add_template(save_template)
+        template.add_template(argv.template)
 
     # Add arguments to .gitignore if the argument is given
     if argv.add is not None:
-        add_arguments = argv.add
-        template.add_arguments(add_arguments)
+        template.add_arguments(argv.add)
+
+
+if __name__ == "__main__":
+
+    main()

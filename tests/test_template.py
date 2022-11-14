@@ -11,7 +11,7 @@ def test_template():
     template = Template("./tests/test_outputs/")
 
     # Remove template in test_outputs directory
-    template.delete_gitignore()
+    template.delete_gitignore(None)
 
     template_dir = Path("./git2ignore/templates/")
 
@@ -50,3 +50,9 @@ def test_template():
     # Test with comma separation
     with pytest.warns(UserWarning):
         template.add_arguments(".DS_Store, .vscode")
+
+    template.delete_gitignore(".vscode")
+    assert (
+        Path("./tests/test_outputs/.gitignore").read_text().splitlines()[-1]
+        == ".DS_Store"
+    )
