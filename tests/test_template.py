@@ -11,7 +11,7 @@ def test_template():
     template = Template("./tests/test_outputs/")
 
     # Remove template in test_outputs directory
-    template.delete_gitignore(None)
+    template.delete_gitignore(True)
 
     template_dir = Path("./git2ignore/templates/")
 
