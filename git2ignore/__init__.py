@@ -4,7 +4,7 @@ from typing import Any
 
 from .git2ignore import Template
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 GI_PARSE = argparse.ArgumentParser(
     prog="git2ignore",
