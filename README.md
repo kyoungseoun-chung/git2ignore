@@ -63,7 +63,7 @@ options:
 
   - However, you can also specify the path to store `.gitignore` file.
 
-  > Note that, you have to attach `-p` flag and its directory path relative to the current working directory all the time (to add arguments mostly) unless you change your current location to the directory where you save the template.
+    > Note that, you have to attach `-p` flag and its directory path relative to the current working directory all the time (to add arguments mostly) unless you change your current location to the directory where you save the template.
 
     ```zsh
     git2ignore -t python -p ./git_repo/
@@ -88,3 +88,5 @@ options:
   ```zsh
   git2ignore -d .DS_Store  # Remove .DS_Store in .gitignore
   ```
+
+> Note that the flag `-t`, `-a`, and `-d` have their own priority. `git2ignore` will check `-d` first. Later check `-t`, and will check `-a` as for the last step. Therefore, `git2ignore -d -a .DS_Store -t python` command will delete pre-existing `.gitignore` file first, and create default `python` template, and add `.DS_Store` at the end of `.gitignore` file.
