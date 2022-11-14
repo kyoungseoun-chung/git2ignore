@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 import argparse
-from typing import Any
 
 from .git2ignore import Template
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 GI_PARSE = argparse.ArgumentParser(
     prog="git2ignore",
