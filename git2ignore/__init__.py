@@ -22,7 +22,7 @@ GI_PARSE.add_argument(
     "--delete",
     nargs="?",
     const=True,
-    metavar="delete",
+    metavar="either blank or arguments",
     help="Delete .gitignore file or delete arguments in .gitignore file.",
 )
 GI_PARSE.add_argument(
@@ -31,14 +31,14 @@ GI_PARSE.add_argument(
 GI_PARSE.add_argument(
     "-a",
     "--add",
-    metavar="add",
+    metavar="arguments",
     help="Add args as new lines to .gitignore. You can add multiple arguments serpated by whitespace/s or comma.",
     type=str,
 )
 GI_PARSE.add_argument(
     "-p",
     "--path",
-    metavar="path",
+    metavar="path to save",
     help="Custom path to save .gitignore. Default is current working directory.",
     type=str,
 )

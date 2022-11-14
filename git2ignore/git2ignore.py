@@ -3,7 +3,7 @@ import re
 import warnings
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional
+from typing import Union
 
 
 TEMPLATE_DIR = Path(__file__).parents[0] / Path("templates")
@@ -89,12 +89,12 @@ class Template:
                     f.write(f"\n{arg}")
         print("git2ignore: done!")
 
-    def delete_gitignore(self, args: Optional[str]) -> None:
+    def delete_gitignore(self, args: Union[bool, str]) -> None:
         """Delete gitignore file created."""
 
         gitignore_path = Path(self.gitignore)
 
-        if args is None:
+        if isinstance(args, bool) and args:
             if gitignore_path.exists():
                 gitignore_path.unlink()
             else:
@@ -103,7 +103,7 @@ class Template:
                         "git2ignore: .gitignore does not exist! No action required."
                     )
                 )
-        else:
+        elif isinstance(args, str):
             ignore_text = self.gitignore.read_text()
             args_splitted = _split_args(args)
             for arg in args_splitted:
@@ -119,6 +119,10 @@ class Template:
                     # If there is two line breaks, remove one
                     args_cleaned = re.sub("\n\n\n", "\n", args_deleted)
                     self.gitignore.write_text(args_cleaned)
+        else:
+            raise ValueError(
+                "git2ignore: delete_gitignore requires either bool or str!"
+            )
 
 
 def _split_args(args: str) -> list[str]:
