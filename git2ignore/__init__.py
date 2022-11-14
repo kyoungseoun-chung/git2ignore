@@ -44,7 +44,7 @@ GI_PARSE.add_argument(
 
 
 def main() -> None:
-    """Main routine. Return dictionary for debugging purpose."""
+    """Main routine."""
 
     print(f"git2ignore version: {__version__}")
     argv = GI_PARSE.parse_args()
