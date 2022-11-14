@@ -23,11 +23,36 @@ python3 -m pip install git2ignore
 
 ## How-to-Use
 
+- Supporting features
+
+``` zsh
+$ git2ignore -h
+usage: git2ignore [-h] [-l] [-d [either blank or arguments]] [-t template]
+                  [-a arguments] [-p path to save]
+
+python interface to add gitignore template.
+
+options:
+  -h, --help            show this help message and exit
+  -l, --list            Print list of supported templates.
+  -d [either blank or arguments], --delete [either blank or arguments]
+                        Delete .gitignore file or delete arguments in .gitignore
+                        file.
+  -t template, --template template
+                        Add template to .gitignore.
+  -a arguments, --add arguments
+                        Add args as new lines to .gitignore. You can add multiple
+                        arguments serpated by whitespace/s or comma.
+  -p path to save, --path path to save
+                        Custom path to save .gitignore. Default is current working
+                        directory.
+```
+
 - List all available templates
 
-    ```zsh
-    git2ignore -l
-    ```
+  ```zsh
+  git2ignore -l
+  ```
 
 - Add template
   - By default, `git2ignore` will store `.gitignore` file to current working directory: `./`
@@ -52,8 +77,14 @@ python3 -m pip install git2ignore
     git2ignore -a .DS_Store ./tests/test_outputs/ -p ./git_repo/ # With custom path
     ```
 
-- Delete `.gitignore`
+- Delete `.gitignore` file
 
-    ```zsh
-    git2ignore -d
-    ```
+  ```zsh
+  git2ignore -d
+  ```
+
+- Delete arguments in `.gitignore`
+
+  ```zsh
+  git2ignore -d .DS_Store  # Remove .DS_Store in .gitignore
+  ```
