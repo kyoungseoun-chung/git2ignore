@@ -118,8 +118,12 @@ class Template:
                     args_deleted = re.sub(arg, "\n", ignore_text)
                     # If there is two line breaks, remove one
                     args_cleaned = re.sub("\n\n\n", "\n", args_deleted)
+                    print(f"git2ignore: removing {args} from .gitignore...")
                     # Remove line break at the end of the file and save
                     self.gitignore.write_text(args_cleaned.rstrip("\n"))
+
+            print("git2ignore: done!")
+
         else:
             raise ValueError(
                 "git2ignore: delete_gitignore requires either bool or str!"
