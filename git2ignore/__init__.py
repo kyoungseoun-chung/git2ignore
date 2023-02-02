@@ -3,7 +3,7 @@ import argparse
 
 from .git2ignore import Template
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 GI_PARSE = argparse.ArgumentParser(
     prog="git2ignore",
